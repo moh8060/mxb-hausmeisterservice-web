@@ -472,6 +472,7 @@ function AboutSection() {
     </section>
   )
 }
+
 function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
