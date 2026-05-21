@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Sparkles, Snowflake } from 'lucide-react'
 import BeforeAfter from './components/BeforeAfter'
+import { useState } from 'react'
 
 export default function Home() {
   return (
@@ -471,8 +472,56 @@ function AboutSection() {
     </section>
   )
 }
-
 function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
+  })
+
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>(
+    'idle'
+  )
+
+  const isValid =
+    formData.name.trim() &&
+    formData.email.trim() &&
+    formData.message.trim()
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    if (!isValid) return
+
+    setStatus('sending')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        setStatus('error')
+        return
+      }
+
+      setStatus('success')
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        message: '',
+      })
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <section id="kontakt" className="relative px-6 py-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.10),transparent_40%)]" />
@@ -485,7 +534,7 @@ function ContactSection() {
             </div>
 
             <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
-            Jetzt unverbindlich anfragen
+              Jetzt unverbindlich anfragen
             </h2>
 
             <p className="mt-6 text-lg leading-relaxed text-slate-300">
@@ -494,52 +543,118 @@ function ContactSection() {
             </p>
 
             <div className="mt-10 space-y-4 text-slate-300">
-              <div>Telefon: +49 176 83325207</div>
-              <div>E-Mail: moh8060@hotmail.com</div>
-              <div>Region: Schleswig-Holstein</div>
-            </div>
+  <div>
+    Telefon:{' '}
+    <a href="tel:+4917683325207" className="text-cyan-300 hover:text-cyan-200">
+      +49 176 83325207
+    </a>
+  </div>
+
+  <div>
+    E-Mail:{' '}
+    <a href="mailto:kontakt@mxb-h.com" className="text-cyan-300 hover:text-cyan-200">
+    kontakt@mxb-h.com
+    </a>
+  </div>
+
+  <div>
+    Adresse:{' '}
+    <a
+      href="https://www.google.com/maps/search/?api=1&query=Am%20Krankenhaus%2014%2C%2024211%20Preetz"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-cyan-300 hover:text-cyan-200"
+    >
+      Am Krankenhaus 14, 24211 Preetz
+    </a>
+  </div>
+
+  <div>Region: Schleswig-Holstein</div>
+</div>
+<div className="mt-12 overflow-hidden rounded-[2rem] border border-white/10">
+  <iframe
+    title="MXB Standort auf Google Maps"
+    src="https://www.google.com/maps?q=Am%20Krankenhaus%2014%2C%2024211%20Preetz&output=embed"
+    className="h-[360px] w-full border-0"
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</div>
+
           </div>
 
-          <form
-  className="space-y-5"
-  action="mailto:moh8060@hotmail.com"
-  method="POST"
-  encType="text/plain"
->
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <input
-              placeholder="Name"
-              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition focus:border-cyan-400"
+              name="name"
+              required
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              placeholder="Name *"
+              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
             />
 
-            <input
-              placeholder="Telefon"
-              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition focus:border-cyan-400"
-            />
+<input
+  name="phone"
+  value={formData.phone}
+  onChange={(e) =>
+    setFormData({ ...formData, phone: e.target.value })
+  }
+  placeholder="Telefon"
+  className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
+/>
 
             <input
-              placeholder="E-Mail"
-              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition focus:border-cyan-400"
+              name="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              placeholder="E-Mail *"
+              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
             />
 
             <textarea
-              placeholder="Nachricht"
+              name="message"
+              required
+              value={formData.message}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
+              placeholder="Nachricht *"
               rows={5}
-              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition focus:border-cyan-400"
+              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
             />
 
             <button
               type="submit"
-              className="w-full rounded-2xl bg-cyan-400 px-8 py-4 font-semibold text-black shadow-[0_0_45px_rgba(34,211,238,0.35)] transition hover:bg-cyan-300"
+              disabled={!isValid || status === 'sending'}
+              className="w-full rounded-2xl bg-cyan-400 px-8 py-4 font-semibold text-black shadow-[0_0_45px_rgba(34,211,238,0.35)] transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:text-slate-300 disabled:shadow-none"
             >
-              Anfrage senden
+              {status === 'sending' ? 'Wird gesendet...' : 'Anfrage senden'}
             </button>
+
+            {status === 'success' && (
+              <p className="rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-5 py-4 text-sm text-emerald-300">
+                Ihre Anfrage wurde erfolgreich gesendet.
+              </p>
+            )}
+
+            {status === 'error' && (
+              <p className="rounded-2xl border border-red-400/30 bg-red-400/10 px-5 py-4 text-sm text-red-300">
+                Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es
+                später erneut.
+              </p>
+            )}
           </form>
         </div>
       </div>
     </section>
   )
 }
-
 function Footer() {
   return (
     <footer className="relative border-t border-white/10 px-6 py-14 text-sm text-slate-400">
@@ -579,17 +694,47 @@ function Footer() {
     Datenschutz
   </a>
 </div>
+<div className="mt-6 flex flex-wrap gap-3">
+  <a href="#" className="rounded-full border border-white/10 px-4 py-2 hover:border-cyan-400 hover:text-cyan-300">
+    Facebook
+  </a>
+  <a href="#" className="rounded-full border border-white/10 px-4 py-2 hover:border-cyan-400 hover:text-cyan-300">
+    Instagram
+  </a>
+  <a href="#" className="rounded-full border border-white/10 px-4 py-2 hover:border-cyan-400 hover:text-cyan-300">
+    LinkedIn
+  </a>
+  <a href="#" className="rounded-full border border-white/10 px-4 py-2 hover:border-cyan-400 hover:text-cyan-300">
+    X
+  </a>
+  <a href="#" className="rounded-full border border-white/10 px-4 py-2 hover:border-cyan-400 hover:text-cyan-300">
+    TikTok
+  </a>
+</div>
       </div>
     </footer>
   )
 }
 function FloatingContactButton() {
   return (
-    <a
-      href="tel:+4917683325207"
-      className="fixed bottom-5 right-5 z-50 hidden rounded-full bg-cyan-400 px-6 py-4 font-bold text-black shadow-[0_0_45px_rgba(34,211,238,0.55)] transition hover:scale-105 hover:bg-cyan-300 md:block"
-    >
-      Jetzt anrufen
-    </a>
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      
+      <a
+  href="https://wa.me/4917683325207"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex h-[58px] min-w-[210px] items-center justify-center rounded-full bg-[#25D366] px-8 font-bold text-white shadow-[0_0_45px_rgba(37,211,102,0.45)] transition hover:scale-105 hover:bg-[#1ebe5d]"
+>
+  WhatsApp
+</a>
+
+<a
+  href="tel:+4917683325207"
+  className="flex h-[58px] min-w-[210px] items-center justify-center rounded-full bg-cyan-400 px-8 font-bold text-black shadow-[0_0_45px_rgba(34,211,238,0.55)] transition hover:scale-105 hover:bg-cyan-300"
+>
+  Jetzt anrufen
+</a>
+
+    </div>
   )
 }

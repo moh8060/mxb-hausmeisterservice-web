@@ -35,7 +35,7 @@ export default function ImpressumPage() {
               <p>
                 Telefon: +49 176 83325207
                 <br />
-                E-Mail: moh8060@hotmail.com
+                E-Mail: kontakt@mxb-h.com
               </p>
             </div>
   

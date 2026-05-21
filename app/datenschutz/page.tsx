@@ -31,7 +31,7 @@ export default function DatenschutzPage() {
                 <br />
                 Deutschland
                 <br />
-                E-Mail: moh8060@hotmail.com
+                E-Mail: kontakt@mxb-h.com
               </p>
             </div>
   
