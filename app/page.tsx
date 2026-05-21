@@ -476,9 +476,9 @@ function AboutSection() {
 function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
+    telefon: '',
     email: '',
-    message: '',
+    nachricht: '',
   })
 
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>(
@@ -488,7 +488,7 @@ function ContactSection() {
   const isValid =
     formData.name.trim() &&
     formData.email.trim() &&
-    formData.message.trim()
+    formData.nachricht.trim()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -514,9 +514,9 @@ function ContactSection() {
       setStatus('success')
       setFormData({
         name: '',
-        phone: '',
+        telefon: '',
         email: '',
-        message: '',
+        nachricht: '',
       })
     } catch {
       setStatus('error')
@@ -597,10 +597,10 @@ function ContactSection() {
             />
 
 <input
-  name="phone"
-  value={formData.phone}
+  name="telefon"
+  value={formData.telefon}
   onChange={(e) =>
-    setFormData({ ...formData, phone: e.target.value })
+    setFormData({ ...formData, telefon: e.target.value })
   }
   placeholder="Telefon"
   className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
@@ -618,17 +618,19 @@ function ContactSection() {
               className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
             />
 
-            <textarea
-              name="message"
-              required
-              value={formData.message}
-              onChange={(e) =>
-                setFormData({ ...formData, message: e.target.value })
-              }
-              placeholder="Nachricht *"
-              rows={5}
-              className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
-            />
+<textarea
+  placeholder="Nachricht"
+  required
+  rows={5}
+  value={formData.nachricht}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      nachricht: e.target.value,
+    })
+  }
+  className="w-full rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-white outline-none transition focus:border-cyan-400"
+/>
 
             <button
               type="submit"

@@ -5,11 +5,18 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, telefon, email, nachricht } = body
+
+    const name = body.name
+    const telefon = body.telefon
+    const email = body.email
+    const nachricht = body.nachricht
 
     if (!name || !email || !nachricht) {
       return Response.json(
-        { error: 'Bitte füllen Sie Name, E-Mail und Nachricht aus.' },
+        {
+          error: 'Bitte füllen Sie Name, E-Mail und Nachricht aus.',
+          received: body,
+        },
         { status: 400 }
       )
     }
@@ -31,6 +38,8 @@ export async function POST(request: Request) {
 
     return Response.json({ success: true })
   } catch (error) {
+    console.error('Contact API error:', error)
+
     return Response.json(
       { error: 'Die Anfrage konnte nicht gesendet werden.' },
       { status: 500 }
