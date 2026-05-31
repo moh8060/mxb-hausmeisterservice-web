@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Sparkles, Snowflake } from 'lucide-react'
 import BeforeAfter from './components/BeforeAfter'
 import { useState } from 'react'
@@ -9,12 +8,7 @@ import Image from 'next/image'
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#020B14] text-white">
-      <motion.nav
-  initial={{ y: -80, opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  transition={{ duration: 0.7, ease: 'easeOut' }}
-  className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-[#020B14]/75 backdrop-blur-2xl"
->
+      <nav className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-[#020B14]/75 backdrop-blur-2xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center gap-4">
 
@@ -52,36 +46,12 @@ export default function Home() {
 
           
         </div>
-        </motion.nav>
-
+        </nav>
         <section className="relative flex min-h-screen items-center px-6 pb-20 pt-36">
       <div className="absolute inset-0 overflow-hidden">
 
-<motion.div
-  animate={{
-    x: [0, 40, -20, 0],
-    y: [0, -30, 20, 0],
-  }}
-  transition={{
-    duration: 18,
-    repeat: Infinity,
-    ease: 'easeInOut',
-  }}
-  className="absolute left-[-10%] top-[5%] h-[520px] w-[520px] rounded-full bg-cyan-400/20 blur-[140px]"
-/>
-
-<motion.div
-  animate={{
-    x: [0, -40, 20, 0],
-    y: [0, 40, -10, 0],
-  }}
-  transition={{
-    duration: 22,
-    repeat: Infinity,
-    ease: 'easeInOut',
-  }}
-  className="absolute bottom-[-20%] right-[-10%] h-[620px] w-[620px] rounded-full bg-blue-600/20 blur-[160px]"
-/>
+      <div className="absolute left-[-10%] top-[5%] h-[520px] w-[520px] rounded-full bg-cyan-400/20 blur-[140px]" />
+      <div className="absolute bottom-[-20%] right-[-10%] h-[620px] w-[620px] rounded-full bg-blue-600/20 blur-[160px]" />
 
 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_35%)]" />
 
@@ -99,11 +69,7 @@ export default function Home() {
 />
 </div>
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
-        <motion.div
-  initial={{ opacity: 0, y: 40 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
->
+        <div>
   <div className="mb-6 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300">
     Hausmeisterservice & Objektbetreuung in Schleswig-Holstein
   </div>
@@ -148,14 +114,8 @@ export default function Home() {
       </div>
     ))}
   </div>
-</motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-            className="relative hidden lg:block"
-          >
+  </div>
+  <div className="relative hidden lg:block">
               <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/20 blur-[90px]" />
 
 <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 shadow-2xl backdrop-blur-xl">
@@ -174,7 +134,7 @@ export default function Home() {
   </div>
 
 </div>
-          </motion.div>
+</div>
         </div>
       </section>
       <SectionDivider />
@@ -344,39 +304,28 @@ function ServicesSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.08),transparent_35%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-16 max-w-3xl"
-        >
+        <div className="mb-16 max-w-3xl">
           <div className="mb-5 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300">
             LEISTUNGEN
           </div>
 
           <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
-          Unsere Leistungen im Überblick
+            Unsere Leistungen im Überblick
           </h2>
 
           <p className="mt-6 text-lg leading-relaxed text-slate-300">
-          Von Glasreinigung über Winterdienst bis zur laufenden Objektbetreuung – MXB unterstützt private, gewerbliche und verwaltete Immobilien mit klar definierten Leistungen.
+            Von Glasreinigung über Winterdienst bis zur laufenden Objektbetreuung – MXB unterstützt private, gewerbliche und verwaltete Immobilien mit klar definierten Leistungen.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => {
+          {services.map((service) => {
             const Icon = service.icon
 
             return (
-              <motion.div
+              <div
                 key={service.title}
-                initial={{ opacity: 0, y: 45 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.65, delay: index * 0.07 }}
-                whileHover={{ y: -10, scale: 1.015 }}
-                className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/45"
+                className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400/45"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -393,15 +342,14 @@ function ServicesSection() {
                     {service.text}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>
       </div>
     </section>
   )
-}
-function AboutSection() {
+}function AboutSection() {
   const values = [
     'Klare Kommunikation',
     'Saubere Ausführung',
@@ -422,82 +370,71 @@ function AboutSection() {
   className="w-[700px] max-w-[90vw] object-contain"
 />
 </div>
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, x: -45 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.75 }}
-        >
-          <div className="mb-5 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300">
-            ÜBER MXB
-          </div>
+<div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
+  <div>
+    <div className="mb-5 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300">
+      ÜBER MXB
+    </div>
 
-          <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
-          So arbeitet MXB
-          </h2>
+    <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
+      So arbeitet MXB
+    </h2>
 
-          <p className="mt-7 text-lg leading-relaxed text-slate-300">
-            MXB Hausmeisterservice & Dienstleistung steht für zuverlässige,
-            saubere und praxisorientierte Betreuung von Liegenschaften,
-            Gebäudebereichen und Außenanlagen.
-          </p>
+    <p className="mt-7 text-lg leading-relaxed text-slate-300">
+      MXB Hausmeisterservice & Dienstleistung steht für zuverlässige,
+      saubere und praxisorientierte Betreuung von Liegenschaften,
+      Gebäudebereichen und Außenanlagen.
+    </p>
 
-          <p className="mt-5 leading-relaxed text-slate-400">
-            Unser Ziel ist es, Immobilien in einem gepflegten, ordentlichen und
-            funktionsfähigen Zustand zu halten – mit klarer Abstimmung,
-            strukturierter Arbeitsweise und verlässlicher Ausführung.
-          </p>
+    <p className="mt-5 leading-relaxed text-slate-400">
+      Unser Ziel ist es, Immobilien in einem gepflegten, ordentlichen und
+      funktionsfähigen Zustand zu halten – mit klarer Abstimmung,
+      strukturierter Arbeitsweise und verlässlicher Ausführung.
+    </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {values.map((value) => (
-              <div key={value} className="flex items-center gap-3 text-slate-300">
-                <CheckCircle2 className="text-cyan-300" size={20} />
-                {value}
+    <div className="mt-8 grid gap-4 sm:grid-cols-2">
+      {values.map((value) => (
+        <div key={value} className="flex items-center gap-3 text-slate-300">
+          <CheckCircle2 className="text-cyan-300" size={20} />
+          {value}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="relative">
+    <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/20 blur-[90px]" />
+
+    <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-6 shadow-2xl backdrop-blur-xl">
+      <div className="rounded-[1.5rem] bg-gradient-to-br from-cyan-400/20 via-slate-800 to-slate-950 p-8">
+        <div className="grid gap-6">
+          {[
+            ['01', 'Anfrage aufnehmen'],
+            ['02', 'Bedarf sauber klären'],
+            ['03', 'Transparentes Angebot'],
+            ['04', 'Zuverlässige Ausführung'],
+          ].map(([number, text]) => (
+            <div
+              key={number}
+              className="flex items-center gap-5 rounded-2xl border border-white/10 bg-black/20 p-5 backdrop-blur"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400 text-lg font-bold text-black">
+                {number}
               </div>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 45 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.75 }}
-          className="relative"
-        >
-          <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/20 blur-[90px]" />
-
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-6 shadow-2xl backdrop-blur-xl">
-            <div className="rounded-[1.5rem] bg-gradient-to-br from-cyan-400/20 via-slate-800 to-slate-950 p-8">
-              <div className="grid gap-6">
-                {[
-                  ['01', 'Anfrage aufnehmen'],
-                  ['02', 'Bedarf sauber klären'],
-                  ['03', 'Transparentes Angebot'],
-                  ['04', 'Zuverlässige Ausführung'],
-                ].map(([number, text]) => (
-                  <div
-                    key={number}
-                    className="flex items-center gap-5 rounded-2xl border border-white/10 bg-black/20 p-5 backdrop-blur"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400 text-lg font-bold text-black">
-                      {number}
-                    </div>
-                    <div className="font-semibold text-white">{text}</div>
-                  </div>
-                ))}
-              </div>
+              <div className="font-semibold text-white">{text}</div>
             </div>
-          </div>
-        </motion.div>
+          ))}
+        </div>
       </div>
+    </div>
+  </div>
+</div>
     </section>
   )
 }
 
 function ContactSection() {
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
     name: '',
     telefon: '',
     email: '',
