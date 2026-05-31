@@ -41,16 +41,10 @@ export default function BeforeAfter({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 55 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.75 }}
-      viewport={{ once: true }}
-      className="group"
-    >
+    <div className="group">
       <div
-  ref={containerRef}
-  className="relative aspect-[3/4] w-full select-none overflow-hidden rounded-[32px] border border-cyan-400/20 shadow-[0_0_80px_rgba(34,211,238,0.10)] cursor-ew-resize touch-none"
+        ref={containerRef}
+        className="relative aspect-[3/4] w-full select-none overflow-hidden rounded-[32px] border border-cyan-400/20 shadow-[0_0_80px_rgba(34,211,238,0.10)] cursor-ew-resize touch-none"
         onPointerDown={(e) => {
           setDragging(true)
           updatePosition(e.clientX)
@@ -69,22 +63,20 @@ export default function BeforeAfter({
           src={afterImage}
           alt={title ? `${title} nachher` : 'Nachher Bild'}
           fill
-          priority
-          sizes="(max-width: 768px) 100vw, 1200px"
+          sizes="(max-width: 768px) 100vw, 820px"
           draggable={false}
           className="pointer-events-none object-cover"
         />
 
-<motion.div
-  className="absolute inset-0 z-10 overflow-hidden"
-  style={{ clipPath: beforeClip }}
->
+        <motion.div
+          className="absolute inset-0 z-10 overflow-hidden"
+          style={{ clipPath: beforeClip }}
+        >
           <Image
             src={beforeImage}
             alt={title ? `${title} vorher` : 'Vorher Bild'}
             fill
-            priority
-            sizes="(max-width: 768px) 100vw, 1200px"
+            sizes="(max-width: 768px) 100vw, 820px"
             draggable={false}
             className="pointer-events-none object-cover"
           />
@@ -113,6 +105,6 @@ export default function BeforeAfter({
 
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.08),transparent_60%)] opacity-0 transition duration-500 group-hover:opacity-100" />
       </div>
-    </motion.div>
+    </div>
   )
 }

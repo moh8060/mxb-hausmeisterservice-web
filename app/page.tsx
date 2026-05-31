@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Sparkles, Snowflake } from 'lucide-react'
 import BeforeAfter from './components/BeforeAfter'
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -23,11 +24,13 @@ export default function Home() {
   <div className="absolute inset-0 rounded-full bg-cyan-400/20 blur-2xl" />
 
   {/* logo */}
-  <img
-    src="/logo.png"
-    alt="MXB Logo"
-    className="relative h-16 w-auto object-contain drop-shadow-[0_0_18px_rgba(34,211,238,0.25)]"
-  />
+  <Image
+  src="/logo.png"
+  alt="MXB Logo"
+  width={180}
+  height={64}
+  className="relative h-16 w-auto object-contain drop-shadow-[0_0_18px_rgba(34,211,238,0.25)]"
+/>
 </div>
 
 <div className="leading-tight">
@@ -86,57 +89,66 @@ export default function Home() {
 </div>
 
 <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.04]">
-  <img
-    src="/logo.png"
-    alt="MXB Background Logo"
-    className="w-[700px] max-w-[90vw] object-contain"
-  />
+<Image
+  src="/logo-bg.webp"
+  alt=""
+  width={700}
+  height={700}
+  aria-hidden="true"
+  className="w-[700px] max-w-[90vw] object-contain"
+/>
 </div>
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="mb-6 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300">
-              Premium Objektbetreuung in Schleswig-Holstein
-            </div>
+        <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+>
+  <div className="mb-6 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300">
+    Hausmeisterservice & Objektbetreuung in Schleswig-Holstein
+  </div>
 
-            <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.04em] md:text-7xl text-4xl">
-            Zuverlässige Betreuung für gepflegte Immobilien und professionelle Außenwirkung
-            </h1>
+  <h1 className="max-w-4xl text-3xl font-black leading-[1.05] tracking-[-0.03em] md:text-5xl">
+    Professionelle Objektbetreuung für Immobilien in Schleswig-Holstein
+  </h1>
 
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
-  Strukturierte Objektpflege, saubere Ausführung und zuverlässige Betreuung
-  für Eigentümer, Verwaltungen und gewerbliche Immobilien.
-</p>
+  <p className="mt-7 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
+    MXB unterstützt Eigentümer, Hausverwaltungen und Gewerbekunden mit
+    zuverlässigem Hausmeisterservice, Reinigung, Gartenpflege,
+    Winterdienst und laufender Objektpflege.
+  </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#kontakt"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-8 py-4 font-semibold text-black shadow-[0_0_45px_rgba(34,211,238,0.35)] transition hover:bg-cyan-300"
-              >
-                Jetzt unverbindlich anfragen
-                <ArrowRight size={18} />
-              </a>
+  <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+    <a
+      href="#kontakt"
+      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-7 py-4 font-semibold text-black shadow-[0_0_45px_rgba(34,211,238,0.35)] transition hover:bg-cyan-300"
+    >
+      Angebot anfragen
+      <ArrowRight size={18} />
+    </a>
 
-              <a
-                href="#leistungen"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white backdrop-blur transition hover:border-cyan-400/50"
-              >
-                Leistungen ansehen
-              </a>
-            </div>
+    <a
+      href="tel:+4917683325207"
+      className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-7 py-4 font-semibold text-white backdrop-blur transition hover:border-cyan-400/50 hover:text-cyan-300"
+    >
+      Direkt anrufen
+    </a>
+  </div>
 
-            <div className="mt-10 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
-              {['Zuverlässig', 'Termintreu', 'Klare Kommunikation', 'Werterhaltung'].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <CheckCircle2 className="text-cyan-300" size={18} />
-                  {item}
-                </div>
-              ))}
-            </div>
-          </motion.div>
+  <div className="mt-9 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
+    {[
+      'Objektbetreuung',
+      'Reinigung & Pflege',
+      'Winterdienst',
+      'Gartenpflege',
+    ].map((item) => (
+      <div key={item} className="flex items-center gap-2">
+        <CheckCircle2 className="text-cyan-300" size={18} />
+        {item}
+      </div>
+    ))}
+  </div>
+</motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 40 }}
@@ -144,16 +156,24 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.15 }}
             className="relative hidden lg:block"
           >
-            <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/20 blur-[90px]" />
+              <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/20 blur-[90px]" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 shadow-2xl backdrop-blur-xl">
-              <img
-                src="/hero-worker.png"
-                alt="Gepflegte Immobilie"
-                className="h-[520px] w-full rounded-[1.5rem] object-cover object-center brightness-[0.82] contrast-110 saturate-110"
-              />
+<div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 shadow-2xl backdrop-blur-xl">
 
-            </div>
+  <div className="relative h-[520px] w-full overflow-hidden rounded-[1.5rem]">
+    <Image
+      src="/hero-worker.webp"
+      alt="Gepflegte Immobilie"
+      fill
+      priority
+      fetchPriority="high"
+      sizes="(max-width: 768px) 100vw, 566px"
+      quality={75}
+      className="object-cover object-center brightness-[0.82] contrast-110 saturate-110"
+    />
+  </div>
+
+</div>
           </motion.div>
         </div>
       </section>
@@ -393,11 +413,14 @@ function AboutSection() {
     <section id="about" className="relative px-6 py-32">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(34,211,238,0.08),transparent_35%)]" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.04]">
-  <img
-    src="/logo.png"
-    alt="MXB Background Logo"
-    className="w-[700px] max-w-[90vw] object-contain"
-  />
+      <Image
+  src="/logo-bg.webp"
+  alt=""
+  width={700}
+  height={700}
+  aria-hidden="true"
+  className="w-[700px] max-w-[90vw] object-contain"
+/>
 </div>
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
         <motion.div
@@ -619,6 +642,7 @@ function ContactSection() {
             />
 
 <textarea
+name="nachricht"
   placeholder="Nachricht"
   required
   rows={5}
@@ -726,7 +750,7 @@ function FloatingContactButton() {
   href="https://wa.me/4917683325207"
   target="_blank"
   rel="noopener noreferrer"
-  className="flex h-[58px] min-w-[210px] items-center justify-center rounded-full bg-[#25D366] px-8 font-bold text-white shadow-[0_0_45px_rgba(37,211,102,0.45)] transition hover:scale-105 hover:bg-[#1ebe5d]"
+  className="flex h-[58px] min-w-[210px] items-center justify-center rounded-full bg-[#25D366] px-8 font-bold text-black shadow-[0_0_45px_rgba(37,211,102,0.45)] transition hover:scale-105 hover:bg-[#1ebe5d]"
 >
   WhatsApp
 </a>
