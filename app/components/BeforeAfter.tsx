@@ -55,9 +55,13 @@ export default function BeforeAfter({
         }}
         onPointerUp={(e) => {
           setDragging(false)
+          percent.set(50)
           e.currentTarget.releasePointerCapture(e.pointerId)
         }}
-        onPointerCancel={() => setDragging(false)}
+        onPointerCancel={() => {
+          setDragging(false)
+          percent.set(50)
+        }}
       >
         <Image
           src={afterImage}
