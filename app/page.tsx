@@ -115,12 +115,12 @@ export default function Home() {
     ))}
   </div>
   </div>
-  <div className="relative hidden lg:block">
+  <div className="relative mt-10 block lg:mt-0">
               <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/20 blur-[90px]" />
 
 <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 shadow-2xl backdrop-blur-xl">
 
-  <div className="relative h-[520px] w-full overflow-hidden rounded-[1.5rem]">
+<div className="relative h-[320px] w-full overflow-hidden rounded-[1.5rem] sm:h-[380px] lg:h-[520px]">
     <Image
       src="/hero-worker.webp"
       alt="Gepflegte Immobilie"

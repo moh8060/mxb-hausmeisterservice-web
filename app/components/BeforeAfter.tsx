@@ -44,7 +44,7 @@ export default function BeforeAfter({
     <div className="group">
       <div
         ref={containerRef}
-        className="relative aspect-[3/4] w-full select-none overflow-hidden rounded-[32px] border border-cyan-400/20 shadow-[0_0_80px_rgba(34,211,238,0.10)] cursor-ew-resize touch-none"
+        className="before-after-slider relative aspect-[3/4] w-full select-none overflow-hidden rounded-[32px] border border-cyan-400/20 shadow-[0_0_80px_rgba(34,211,238,0.10)] touch-pan-y"
         onPointerDown={(e) => {
           setDragging(true)
           updatePosition(e.clientX)
